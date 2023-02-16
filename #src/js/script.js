@@ -1,6 +1,3 @@
-// require('jquery')
-// require('bootstrap')
-
-let hero = document.querySelector('.hero')
+let hero = $('.hero')
 
 console.log(hero)
