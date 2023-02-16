@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  //@apply bg-dark text-white leading-7;
+  font-family: 'Montserrat', sans-serif;
+}
+
+a {
+  //@apply transition-colors hover:text-primary;
+  color: inherit;
+  text-decoration: none;
+}
+
+label {
+  //@apply inline-block w-full;
+}
+
+input[type="file"], input[type="file"]::-webkit-file-upload-button {
+  //@apply cursor-pointer focus:outline-none;
+}
+
+//input:focus {
+//  box-shadow: none !important;
+//}
+
+.custom-scroll {
+  //@apply overflow-y-auto;
+
+  &::-webkit-scrollbar {
+    //@apply w-0 h-0;
+  }
+  &::-webkit-scrollbar-thumb {
+    //@apply bg-primary bg-opacity-50;
+  }
+  &::-webkit-scrollbar-track {
+    //@apply bg-primary bg-opacity-10;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      //@apply bg-opacity-60;
+    }
+    &::-webkit-scrollbar-track {}
+  }
+}
