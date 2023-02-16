@@ -1,1 +1,1 @@
-console.log('suka')
+@@include('script.js');
