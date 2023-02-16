@@ -1,3 +1,1 @@
-let hero = $('.hero')
-
-console.log(hero)
+console.log('suka')
