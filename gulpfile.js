@@ -1,6 +1,6 @@
-let project_folder = require('path').basename(__dirname);
-let source_folder = "#src";
-let fs = require('fs')
+let project_folder = require('path').basename(__dirname),
+  source_folder = '#src',
+  fs = require('fs')
 
 let path = {
   build: {
@@ -11,9 +11,9 @@ let path = {
     images: project_folder + '/img/'
   },
   src: {
-    html: [source_folder + '/*.html', "!" + source_folder + '/_*.html'],
-    css: source_folder + '/scss/style.scss',
-    js: source_folder + '/js/script.js',
+    html: [source_folder + '/*.html', '!' + source_folder + '/_*.html'],
+    css: source_folder + '/scss/main.scss',
+    js: source_folder + '/js/main.js',
     fonts: source_folder + '/fonts/*.ttf',
     images: source_folder + '/img/**/*.{jpg,png,svg,gif,ico,webp}'
   },
@@ -23,7 +23,7 @@ let path = {
     js: source_folder + '/js/**/*.js',
     images: source_folder + '/img/**/*.{jpg,png,svg,gif,ico,webp}'
   },
-  clean: "./" + project_folder + '/'
+  clean: './' + project_folder + '/'
 }
 
 let {src, dest} = require('gulp'),
@@ -48,10 +48,10 @@ let {src, dest} = require('gulp'),
 function browserSync(params) {
   browsersync.init({
     server: {
-      baseDir: "./" + project_folder + '/',
+      baseDir: './' + project_folder + '/',
     },
     port: 3000,
-    notify: false,
+    notify: false
   })
 }
 
@@ -74,7 +74,7 @@ function css() {
   return src(path.src.css)
     .pipe(
       scss({
-        outputStyle: "expanded"
+        outputStyle: 'expanded'
       })
     )
     .pipe(
@@ -101,7 +101,7 @@ gulp.task('svgSprite', function () {
     .pipe(svgsprite({
       mode: {
         stack: {
-          sprite: "../icons/icons.svg",
+          sprite: '../icons/icons.svg',
           example: true
         }
       }
@@ -166,19 +166,19 @@ function images() {
 
 function fontsStyle(params) {
 
-  let file_content = fs.readFileSync(source_folder + '/scss/fonts.scss');
-  if (file_content == '') {
+  let file_content = fs.readFileSync(source_folder + '/scss/fonts.scss')
+  if (file_content === '') {
     fs.writeFile(source_folder + '/scss/fonts.scss', '', cb);
     return fs.readdir(path.build.fonts, function (err, items) {
       if (items) {
         let c_fontname;
-        for (var i = 0; i < items.length; i++) {
-          let fontname = items[i].split('.');
+        for (let i = 0; i < items.length; i++) {
+          let fontname = items[i].split('.')
           fontname = fontname[0];
-          if (c_fontname != fontname) {
-            fs.appendFile(source_folder + '/scss/fonts.scss', '@include font("' + fontname + '", "' + fontname + '", "400", "normal");\r\n', cb);
+          if (c_fontname !== fontname) {
+            fs.appendFile(source_folder + '/scss/fonts.scss', '@include font("' + fontname + '", "' + fontname + '", "400", "normal");\r\n', cb)
           }
-          c_fontname = fontname;
+          c_fontname = fontname
         }
       }
     })
@@ -188,14 +188,14 @@ function fontsStyle(params) {
 function cb() {}
 
 let build = gulp.series(gulp.parallel(js, images, fontsStyle, fonts, css, html))
-let watch = gulp.parallel(build, watchFiles, browserSync);
+let watch = gulp.parallel(build, watchFiles, browserSync)
 
-exports.fontsStyle = fontsStyle;
-exports.fonts = fonts;
-exports.images = images;
-exports.js = js;
-exports.css = css;
-exports.html = html;
-exports.build = build;
-exports.watch = watch;
-exports.default = watch;
+exports.fontsStyle = fontsStyle
+exports.fonts = fonts
+exports.images = images
+exports.js = js
+exports.css = css
+exports.html = html
+exports.build = build
+exports.watch = watch
+exports.default = watch
